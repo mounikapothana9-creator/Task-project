@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg-video{
+            object-fit: cover;
+            position: fixed;
+            margin-top: 0%;
+            min-width:100%;
+            min-height: 100%;
+        }
+        body,html{
+            height:100%;
+            margin:0;
+            right:0;
+            bottom:0;
+            width:100%;
+            
+            z-index: -1;
+            
+        }
+        
+        div{
+            position: absolute;
+            color:white;
+            /* border-style: solid; */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: rgba(0,0,0,0.6); 
+            padding:40px;
+           
+        }
+        a{
+            color:white;
+        }
+        
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="bg-video">
+        <source src="{% static 'videos/bg_video.mp4' %}" type="video/mp4">
+        
+    </video>
+    <div>
+    <center>
+        <h1>Registration Form</h1>
+   </center>
+ 
+        <form method="post">
+            {% csrf_token %}
+            {{user_form.as_p}}
+            <button type="submit">Register</button>
+        </form>
+        {% if error %}
+        <p>{{error}}</p>
+        {% endif %}
+        <center>
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+  </center>
+    </div>
+</body>
+</html>
